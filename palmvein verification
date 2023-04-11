@@ -1,0 +1,55 @@
+Pseudo code:
+
+Procedure: Human palmvein Verification
+Input: Palm vein image, I
+Output: Authenticate a person as Genuine or Imposter.
+
+/*Initialization*/
+/* ROI extraction */
+CI = Crop(I)
+RI = Resize(CI) // resized to 150 x150
+
+/* Feature Extraction * /
+// Convolve grayscale image using gabor_filter
+GT = convolve(RI, Gabor_filter);
+
+// To extract the feature apply standard deviation to Gabor Template
+Fee = standard_deviation(GT);
+
+/*ADC extraction */
+// Extract the direction code (dc) from the Gabor Template (GT) and apply minimum function to dc to extract the Apparent Direction Code(ADC)
+
+ADC = min(dc)
+
+// By Convolving ADC using gabor filter Energy Map of Apparent Direction Code is extracted
+
+EADC = convolve(ADC, Gabor_Filter);
+
+// By Convolving EADC using gabor template Latent Direction Code is Extracted
+
+LDC = convolve(EADC, GT);
+
+/* Apparent and Latent Direction Code */
+
+// Apply Multiplication Scheme to ADC and LDC to get Apparent and Latent Direction Code
+
+ALDC = ADC * LDC;
+
+/* Final Feature Extraction */
+
+fee1 = standard_deviation(ALDC);
+
+// Apply addition scheme
+Finalarray = add(fee, fee1)
+
+/* Feature Matching*/
+
+// Find the correlation between the extracted feature and given person number
+
+Match = correlation(Finalarray, Person number)
+
+if match == 0.9998
+“Genuine person“;
+else
+“Imposter person “
+end 
