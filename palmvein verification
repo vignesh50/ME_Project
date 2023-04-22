@@ -48,7 +48,7 @@ Finalarray = add(fee, fee1)
 
 Match = correlation(Finalarray, Person number)
 
-if match == 0.9998
+if match == Threshold_Value
 “Genuine person“;
 else
 “Imposter person “
